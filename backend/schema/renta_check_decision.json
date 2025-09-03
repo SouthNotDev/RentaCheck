@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "anio_gravable": {
+      "type": "integer",
+      "description": "Año gravable para el cual se hace la evaluación"
+    },
+    "debe_declarar": {
+      "type": "boolean",
+      "description": "Si la persona debe declarar renta ante DIAN"
+    },
+    "motivos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de motivos que justifican la decisión"
+    },
+    "resumen": {
+      "type": "string",
+      "description": "Resumen ejecutivo de la evaluación"
+    },
+    "montos": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "patrimonio_predial_total_cop": {
+          "type": "number",
+          "description": "Total de patrimonio predial calculado"
+        },
+        "patrimonio_exogena_cop": {
+          "type": "number",
+          "description": "Patrimonio reportado en exógena"
+        },
+        "ingresos_brutos_cop": {
+          "type": "number",
+          "description": "Ingresos brutos totales"
+        },
+        "compras_consumos_cop": {
+          "type": "number",
+          "description": "Compras y consumos totales"
+        },
+        "retenciones_cop": {
+          "type": "number",
+          "description": "Retenciones totales"
+        }
+      }
+    },
+    "uvt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "valor_uvt_cop": {
+          "type": "number",
+          "description": "Valor de la UVT en COP"
+        },
+        "anio_uvt": {
+          "type": "integer",
+          "description": "Año de la UVT utilizada"
+        }
+      },
+      "required": ["valor_uvt_cop", "anio_uvt"]
+    },
+    "prioridad_prediales_aplicada": {
+      "type": "boolean",
+      "description": "Si se aplicó prioridad a prediales sobre exógena"
+    },
+    "verificaciones_rag": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Query utilizada para la verificación"
+          },
+          "doc_id": {
+            "type": "string",
+            "description": "ID del documento fuente"
+          },
+          "source": {
+            "type": "string",
+            "description": "Fuente del documento"
+          },
+          "match_score": {
+            "type": "number",
+            "description": "Score de similitud del match"
+          },
+          "cita": {
+            "type": "string",
+            "description": "Texto de la cita relevante"
+          }
+        },
+        "required": ["query", "doc_id", "match_score"]
+      },
+      "description": "Verificaciones realizadas con RAG"
+    },
+    "incertidumbres": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Aspectos inciertos o que requieren verificación manual"
+    },
+    "archivos_detectados": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "exogena": {
+          "type": "integer",
+          "description": "Número de archivos exógena detectados"
+        },
+        "prediales": {
+          "type": "integer",
+          "description": "Número de archivos prediales detectados"
+        },
+        "vehiculos": {
+          "type": "integer",
+          "description": "Número de archivos de vehículos detectados"
+        }
+      }
+    }
+  },
+  "required": ["anio_gravable", "debe_declarar", "motivos", "uvt", "prioridad_prediales_aplicada"]
+}
