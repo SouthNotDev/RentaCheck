@@ -1,0 +1,25 @@
+{
+  "name": "rentacheck-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test ./tests/*.test.js",
+    "analyze:local": "tsx ./scripts/run-analyze-local.ts",
+    "rag:schema:apply": "DOTENV_CONFIG_PATH=../.env node ./scripts/apply-rag-schema.js",
+    "rag:schema:print": "DOTENV_CONFIG_PATH=../.env node ./scripts/apply-rag-schema.js --print",
+    "rag:ingest": "DOTENV_CONFIG_PATH=../.env node ./scripts/ingest-rag.js",
+    "rag:verify": "DOTENV_CONFIG_PATH=../.env node ./scripts/verify-rag.js",
+    "storage:create-bucket": "DOTENV_CONFIG_PATH=../.env node ./scripts/create-storage-bucket.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "dotenv": "^16.4.5",
+    "openai": "^4.56.0",
+    "ajv": "^8.17.1",
+    "sharp": "^0.33.3",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0"
+  }
+}
